@@ -1,4 +1,7 @@
-# Alt Setter — pick the voicebank's alternate takes from OTO context
+# Lem V4Bi Alt Setter
+
+Makes OpenUtau sing the recorded take whose neighbours match the song, for the
+**Lem V4Bi** voicebanks — **Civet**, **Phascogale** and **Quoll**.
 
 OpenUtau chooses a recording by appending the **Alt** number to the alias it looks
 up: `d ih` becomes `d ih3`. The Lem V4Bi banks were recorded from a list with
@@ -6,6 +9,13 @@ duplicate diphone combinations, and those duplicates are not identical — each 
 was sung next to different neighbours. This tool recovers that context from
 `oto.ini` and sets the matching Alt number, using the same evidence the FestVox
 tooling in `festvox-speech-gui` uses.
+
+**This is a tool for these banks, not a universal alt picker.** The selection
+rules, the phone inventory and the dictionary fallback are built around how the
+Lem V4Bi banks were recorded and how they are laid out on disk, and the test suite
+is only ever run against those three. Another bank might work, but it is untested,
+and it would have to follow the same recording conventions for the answer to mean
+anything.
 
 **It sets the alt expression and nothing else.** Lyrics, timing, phonemes and
 every other expression are left alone, and the whole change is one undo step.
@@ -247,6 +257,13 @@ the file holds, and the picks they came from.
 
 ## Notes and limits
 
+* For the **Lem V4Bi** banks: Civet, Phascogale and Quoll. These are English
+  Arpasing banks whose OTO files list every duplicate of a diphone in recording
+  order, which is what makes the recorded context recoverable at all. A bank that
+  is not recorded that way, or that spells its phones differently, is not
+  supported.
+* The phone derivation and the scoring classes are built for the Arpasing English
+  inventory these banks use.
 * The plugin reads `oto.ini`; it never edits OTO files, audio, or your project
   file.
 * **It sets the values it decides and does not clear anything else.** A value left
@@ -254,8 +271,6 @@ the file holds, and the picks they came from.
   it is. If you want a clean slate, undo the previous run first.
 * Building the plugin needs the .NET 10 SDK, because OpenUtau 0.1.569 targets
   .NET 10.
-* Only English Arpasing-style banks are supported; the phone derivation and the
-  scoring classes are built for that inventory.
 * The command line tool handles one bank at a time, since a `.ustx` alone does
   not record which singer a track uses. The plugin has no such limit.
 * The bundled pronunciation dictionary in `src/AltSetter/data/cmudict.txt` is
