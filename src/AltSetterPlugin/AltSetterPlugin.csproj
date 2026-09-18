@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>AltSetterPlugin</AssemblyName>
+    <RootNamespace>AltSetter.Plugin</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <!-- Where OpenUtau lives; override with -p:OpenUtauDir=... -->
+    <OpenUtauDir Condition="'$(OpenUtauDir)' == ''">D:\OpenUtau</OpenUtauDir>
+  </PropertyGroup>
+
+  <!-- The plugin is loaded inside OpenUtau, so it must reference its assemblies
+       rather than carry copies of them. -->
+  <ItemGroup>
+    <Reference Include="OpenUtau.Core">
+      <HintPath>$(OpenUtauDir)\OpenUtau.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\AltSetter\data\cmudict.txt.gz">
+      <LogicalName>AltSetter.cmudict.txt.gz</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- The bank reading, scoring and phone derivation are shared verbatim with
+       the command line tool; only the entry point differs. -->
+  <ItemGroup>
+    <Compile Include="..\AltSetter\BankReader.cs" Link="shared\BankReader.cs" />
+    <Compile Include="..\AltSetter\LyricHint.cs" Link="shared\LyricHint.cs" />
+    <Compile Include="..\AltSetter\Num.cs" Link="shared\Num.cs" />
+    <Compile Include="..\AltSetter\PhoneClass.cs" Link="shared\PhoneClass.cs" />
+    <Compile Include="..\AltSetter\PhoneAlign.cs" Link="shared\PhoneAlign.cs" />
+    <Compile Include="..\AltSetter\PhrasePlan.cs" Link="shared\PhrasePlan.cs" />
+    <Compile Include="..\AltSetter\Pronouncing.cs" Link="shared\Pronouncing.cs" />
+    <Compile Include="..\AltSetter\Selector.cs" Link="shared\Selector.cs" />
+    <Compile Include="..\AltSetter\TextEnc.cs" Link="shared\TextEnc.cs" />
+  </ItemGroup>
+
+</Project>

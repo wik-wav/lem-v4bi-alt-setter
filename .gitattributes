@@ -1,0 +1,4 @@
+# Normalise line endings so no file shows up as changed just because it was
+# checked out on another machine. Only PowerShell genuinely wants CRLF.
+* text=auto eol=lf
+*.ps1 text eol=crlf

@@ -1,0 +1,11 @@
+# Copy this to fixtures.local.ps1 (which is not committed) and point it at the
+# directory holding the project folders the test suites optionally use:
+#
+#   Headlock\headlock.ustx
+#   Little Ripper Boy\Little Ripper Boy_edit.ustx
+#
+# They are somebody's own songs, so they are not part of the repository, and the
+# checks that need them are skipped when this is not set. Nothing else in the
+# suites uses them; the banks come from D:\UTAU\voice\Lem_V4Bi_*.
+
+$env:ALTSETTER_USTX_DIR = "D:\UTAU\projects"

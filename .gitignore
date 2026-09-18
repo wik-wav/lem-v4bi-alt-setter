@@ -1,0 +1,17 @@
+# build output
+build/
+bin/
+obj/
+
+# the generated gzip of the CMU dictionary (rebuild with tools/extract_cmudict.py)
+src/AltSetter/data/cmudict.txt.gz
+
+# python
+__pycache__/
+*.pyc
+
+# built plugin and command line tool
+dist/
+
+# local paths to the real projects the optional test checks use
+fixtures.local.ps1

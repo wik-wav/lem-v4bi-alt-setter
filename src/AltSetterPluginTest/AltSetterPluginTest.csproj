@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>AltSetterPluginTest</AssemblyName>
+    <RootNamespace>AltSetter.Plugin.Test</RootNamespace>
+    <DebugType>none</DebugType>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <OpenUtauDir Condition="'$(OpenUtauDir)' == ''">D:\OpenUtau</OpenUtauDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="OpenUtau.Core">
+      <HintPath>$(OpenUtauDir)\OpenUtau.Core.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\AltSetter\data\cmudict.txt.gz">
+      <LogicalName>AltSetter.cmudict.txt.gz</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- The shipping plugin source, compiled straight in, so the test exercises
+       exactly what gets installed. -->
+  <ItemGroup>
+    <Compile Include="..\AltSetterPlugin\ContextAltBatchEdit.cs" Link="plugin\ContextAltBatchEdit.cs" />
+    <Compile Include="..\AltSetter\BankReader.cs" Link="shared\BankReader.cs" />
+    <Compile Include="..\AltSetter\LyricHint.cs" Link="shared\LyricHint.cs" />
+    <Compile Include="..\AltSetter\Num.cs" Link="shared\Num.cs" />
+    <Compile Include="..\AltSetter\PhoneClass.cs" Link="shared\PhoneClass.cs" />
+    <Compile Include="..\AltSetter\PhoneAlign.cs" Link="shared\PhoneAlign.cs" />
+    <Compile Include="..\AltSetter\PhrasePlan.cs" Link="shared\PhrasePlan.cs" />
+    <Compile Include="..\AltSetter\Pronouncing.cs" Link="shared\Pronouncing.cs" />
+    <Compile Include="..\AltSetter\Selector.cs" Link="shared\Selector.cs" />
+    <Compile Include="..\AltSetter\TextEnc.cs" Link="shared\TextEnc.cs" />
+    <!-- The plugin reads OpenUtau's in-memory model, not the file, but its
+         parser is what the project-format checks exercise. -->
+    <Compile Include="..\AltSetter\Ustx.cs" Link="shared\Ustx.cs" />
+  </ItemGroup>
+
+</Project>
