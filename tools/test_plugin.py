@@ -586,37 +586,40 @@ def main():
         for slot, (phone, alt) in enumerate(tokens):
             phones_seen.add(phone)
             position = cursor + slot
-            if position + 1 >= len(global_phones):
+            if position >= len(global_phones):
                 continue
-            outer_left = global_phones[position - 1] if position > 0 else "*"
-            outer_right = (global_phones[position + 2]
-                           if position + 2 < len(global_phones) else "*")
-            expected = reference_choice(
-                ref, phone, global_phones[position + 1], outer_left, outer_right)
+            # A take number is glued to the phone whose alias it numbers, and an
+            # alias is named "<phone before> <phone>": the take on this token is
+            # for the transition coming from the phone before it, not the one
+            # leaving it. The first phone of the part is sung out of silence.
+            left = global_phones[position - 1] if position > 0 else "-"
+            outer_left = global_phones[position - 2] if position > 1 else "*"
+            outer_right = (global_phones[position + 1]
+                           if position + 1 < len(global_phones) else "*")
+            expected = reference_choice(ref, left, phone, outer_left, outer_right)
             if expected is None:
                 unresolved += 1
                 continue
             expected_alt, _reason = expected
             if expected_alt != alt:
                 mismatches.append(
-                    f"note {index}: {phone} {global_phones[position + 1]} "
+                    f"note {index}: {left} {phone} "
                     f"context ({outer_left},{outer_right}) "
                     f"plugin alt {alt} vs reference alt {expected_alt}")
             if alt == 0:
                 continue
             alternated += 1
-            nxt = global_phones[position + 1]
-            folders = resolve_alias(alias_map, (phone, nxt), alt)
+            folders = resolve_alias(alias_map, (left, phone), alt)
             if not folders:
-                problems.append(f"note {index}: {phone}{alt} {nxt} has no oto alias")
+                problems.append(f"note {index}: {left} {phone}{alt} has no oto alias")
                 continue
-            expected_folders = diphone_folders.get((phone, nxt), set())
+            expected_folders = diphone_folders.get((left, phone), set())
             if folders != expected_folders:
                 problems.append(
-                    f"note {index}: {phone}{alt} {nxt} exists in {sorted(folders)} "
+                    f"note {index}: {left} {phone}{alt} exists in {sorted(folders)} "
                     f"but the diphone is recorded in {sorted(expected_folders)}")
             if len(examples) < 8:
-                examples.append((index, phone, nxt, alt, len(folders)))
+                examples.append((index, left, phone, alt, len(folders)))
         cursor += len(tokens)
 
     print()

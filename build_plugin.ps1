@@ -52,7 +52,7 @@ if ($Install) {
         $installed.LastWriteTime.ToString("HH:mm:ss"))
     Write-Host ""
     Write-Host "Restart OpenUtau. It appears as:"
-    Write-Host "  Piano Roll -> Notes -> External -> Alt Setter: set alts from voicebank context"
+    Write-Host "  Piano Roll -> Notes -> External -> Lem V4Bi Alt Setter: set alts from recorded context"
     Write-Host ""
     Write-Host "The voicebank comes from the track's own singer, so each track can use a"
     Write-Host "different bank. The change is one undo step (Ctrl+Z)."

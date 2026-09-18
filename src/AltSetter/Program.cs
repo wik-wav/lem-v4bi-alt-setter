@@ -7,7 +7,7 @@ using System.Text;
 namespace AltSetter;
 
 internal static class Program {
-    private const string PluginName = "Alt Settle";
+    private const string PluginName = "Lem V4Bi Alt Setter";
 
     private static int Main(string[] args) {
         Console.OutputEncoding = Encoding.UTF8;
@@ -270,7 +270,7 @@ internal static class Program {
 
     private static void PrintHelp() {
         Console.WriteLine(
-@"Alt Settle - set the Alt expression from the voicebank's recorded context.
+@"Lem V4Bi Alt Setter - set the Alt expression from the voicebank's recorded context.
 
 The Lem V4Bi banks recorded several takes of the same transition, each sung next
 to different neighbours. This tool reads that context out of oto.ini, scores the

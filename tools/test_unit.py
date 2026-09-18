@@ -220,14 +220,15 @@ def main():
     print(f"bank  : {bank}")
 
     # 1. A "ay b" transition followed by "r" must pick the take recorded
-    #    before "r", which is take 1.
+    #    before "r", which is take 1. The number goes on the phone the alias ends
+    #    at — "ay b1", the alias being "ay b" — not on the "ay" it starts from.
     ust = work / "hints.ust"
     make_ust(ust, ["ay [ay b]", "r [r b]"])
     result = run(exe, ust, "--bank", bank, "--quiet")
     check("hint mode exits cleanly", result.returncode == 0, result.stderr)
     lyrics = read_lyrics(ust)
     check("hint for 'ay b' got the take recorded before 'r'",
-          lyrics[1].strip() == "ay [ay1 b]", lyrics)
+          lyrics[1].strip() == "ay [ay b1]", lyrics)
 
     # 2. A transition followed by "z" must keep the base take, which is the one
     #    recorded before "z".

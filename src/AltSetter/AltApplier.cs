@@ -81,8 +81,8 @@ internal sealed class AltApplier {
                 // The take belongs to the transition this phone's alias names,
                 // which is the one coming from the phone before it.
                 var position = flat.IndexOf(slot);
-                var left = position > 0 ? flat[position - 1].Phone : "*";
-                note.Picks.Add((slot.NoteSlot, slot.Alt, slot.Phone, slot.Phone,
+                var left = position > 0 ? flat[position - 1].Phone : "-";
+                note.Picks.Add((slot.NoteSlot, slot.Alt, left, slot.Phone,
                     $"{left}/{slot.Phone}"));
             }
             planned.Add(note);

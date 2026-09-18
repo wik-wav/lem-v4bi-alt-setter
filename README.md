@@ -31,7 +31,7 @@ every other expression are left alone, and the whole change is one undo step.
 Then **restart OpenUtau**. It appears in the piano roll as
 
 ```
-Piano Roll → Notes → External → Alt Setter: set alts from voicebank context
+Piano Roll → Notes → External → Lem V4Bi Alt Setter: set alts from recorded context
 ```
 
 Select some notes (or none, for the whole part) and run it. The Alt sliders in the

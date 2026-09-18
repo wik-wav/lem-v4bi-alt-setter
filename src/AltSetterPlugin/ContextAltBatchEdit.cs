@@ -10,7 +10,8 @@ using UstxFormat = OpenUtau.Core.Format.Ustx;
 namespace AltSetter.Plugin {
 
     /// <summary>
-    /// "Set Alts from voicebank context", for OpenUtau's Notes ↁEExternal menu.
+    /// "Lem V4Bi Alt Setter: set alts from recorded context", for OpenUtau's
+    /// Notes -> External menu.
     ///
     /// It exists as a batch edit so that it runs inside OpenUtau, on the part the
     /// user is looking at. That matters for two reasons: the voicebank comes from
@@ -21,7 +22,7 @@ namespace AltSetter.Plugin {
     /// Only the "alt" phoneme expression is ever written.
     /// </summary>
     public class ContextAltBatchEdit : BatchEdit {
-        public string Name => "Alt Setter: set alts from voicebank context";
+        public string Name => "Lem V4Bi Alt Setter: set alts from recorded context";
 
         public void Run(UProject project, UVoicePart part,
                         List<UNote> selectedNotes, DocManager docManager) {
