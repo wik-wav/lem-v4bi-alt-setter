@@ -270,3 +270,8 @@ the file holds, and the picks they came from.
   run those checks, or the suites skip them and say so. A local
   `fixtures.local.ps1` (not committed — see `fixtures.local.ps1.example`) is
   sourced by the test scripts to set that variable.
+
+## Licence
+
+MIT — see `LICENSE`. The bundled pronunciation dictionary is derived from
+CMUdict, which carries its own permissive licence.
